@@ -1,4 +1,4 @@
-package com.jonathan.ecommerce.prices.infrastructure.adapters.outbound.entity;
+package com.jonathan.ecommerce.prices.infrastructure.adapters.outbound.persistence.h2.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PriceEntity {
+public class H2PriceEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,10 @@ public class PriceEntity {
     @Column(name = "brand_id")
     private Long brandId;
 
+    @Column(name = "start_date")
     private LocalDateTime startDate;
+
+    @Column(name = "end_date")
     private LocalDateTime endDate;
 
     @Column(name = "price_list")

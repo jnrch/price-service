@@ -48,7 +48,7 @@ mvn spring-boot:run
 ```
 mvn clean install
 docker build -t price-service .
-docker run -p 8080:8080 price-service
+docker-compose up
 ```
 
 ### Remove container & docker image

@@ -1,7 +1,8 @@
 package com.jonathan.ecommerce.prices.infrastructure.adapters.outbound.persistence;
 
 import com.jonathan.ecommerce.TestConstant;
-import com.jonathan.ecommerce.prices.infrastructure.adapters.outbound.entity.PriceEntity;
+import com.jonathan.ecommerce.prices.infrastructure.adapters.outbound.persistence.h2.entity.H2PriceEntity;
+import com.jonathan.ecommerce.prices.infrastructure.adapters.outbound.persistence.h2.H2PriceRepositoryInternal;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -20,10 +21,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @TestPropertySource(locations = TestConstant.TEST_PROPERTY_SOURCE_LOCATION)
 @SpringBootTest
 @Sql(TestConstant.SQL_FILE_LOCATION)
-class PriceRepositoryInternalHibernateTest {
+class H2PriceRepositoryInternalTest {
 
     @Autowired
-    private PriceRepositoryInternalHibernate priceRepositoryInternalHibernate;
+    private H2PriceRepositoryInternal h2PriceRepositoryInternal;
 
     @ParameterizedTest
     @MethodSource("com.jonathan.ecommerce.PriceTestDataProvider#testCasesProvider")
@@ -31,7 +32,7 @@ class PriceRepositoryInternalHibernateTest {
         Long brandId = 1L;
         Long productId = 35455L;
 
-        Optional<PriceEntity> actualPrice = priceRepositoryInternalHibernate.findFirstByBrandIdAndProductIdAndStartDateBeforeAndEndDateAfterOrderByPriorityDesc(
+        Optional<H2PriceEntity> actualPrice = h2PriceRepositoryInternal.findFirstByBrandIdAndProductIdAndStartDateBeforeAndEndDateAfterOrderByPriorityDesc(
                 brandId,
                 productId,
                 applicationDate,
@@ -52,7 +53,7 @@ class PriceRepositoryInternalHibernateTest {
         Long productId = 35455L;
         LocalDateTime applicationDate = LocalDateTime.of(2050, 6, 21, 16, 0, 0);
 
-        Optional<PriceEntity> actualPrice = priceRepositoryInternalHibernate.findFirstByBrandIdAndProductIdAndStartDateBeforeAndEndDateAfterOrderByPriorityDesc(
+        Optional<H2PriceEntity> actualPrice = h2PriceRepositoryInternal.findFirstByBrandIdAndProductIdAndStartDateBeforeAndEndDateAfterOrderByPriorityDesc(
                 brandId,
                 productId,
                 applicationDate,

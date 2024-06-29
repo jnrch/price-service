@@ -1,4 +1,4 @@
-package com.jonathan.ecommerce.prices.infrastructure.adapters.outbound.persistence;
+package com.jonathan.ecommerce.prices.infrastructure.adapters.outbound.persistence.h2;
 
 import com.jonathan.ecommerce.prices.domain.model.Price;
 import com.jonathan.ecommerce.prices.application.ports.outbound.PriceRepository;
@@ -11,15 +11,15 @@ import java.util.Optional;
 
 @Repository
 @AllArgsConstructor
-public class PriceRepositoryHibernate implements PriceRepository {
+public class H2PriceRepository implements PriceRepository {
 
-    private final PriceRepositoryInternalHibernate priceRepositoryInternalHibernate;
+    private final H2PriceRepositoryInternal h2PriceRepositoryInternal;
     private final PriceMapper priceMapper;
 
     @Override
     public Optional<Price> findFirstByBrandIdAndProductIdAndStartDateBeforeAndEndDateAfterOrderByPriorityDesc(Long brandId, Long productId, LocalDateTime applicationDate, LocalDateTime applicationDate2) {
-        return priceRepositoryInternalHibernate.
-                findFirstByBrandIdAndProductIdAndStartDateBeforeAndEndDateAfterOrderByPriorityDesc(brandId, productId, applicationDate, applicationDate2)
-                .map(priceMapper::toPrice);
+        return h2PriceRepositoryInternal
+                .findFirstByBrandIdAndProductIdAndStartDateBeforeAndEndDateAfterOrderByPriorityDesc(brandId, productId, applicationDate, applicationDate2)
+                .map(priceMapper::H2PriceEntityToPrice);
     }
 }

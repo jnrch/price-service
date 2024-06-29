@@ -1,9 +1,9 @@
 package com.jonathan.ecommerce.prices.infrastructure.configuration;
 
 import com.jonathan.ecommerce.prices.application.ports.outbound.PriceRepository;
-import com.jonathan.ecommerce.prices.infrastructure.adapters.outbound.persistence.PriceRepositoryHibernate;
-import com.jonathan.ecommerce.prices.infrastructure.adapters.outbound.persistence.PriceRepositoryInternalHibernate;
 import com.jonathan.ecommerce.prices.infrastructure.adapters.outbound.mapper.PriceMapper;
+import com.jonathan.ecommerce.prices.infrastructure.adapters.outbound.persistence.h2.H2PriceRepository;
+import com.jonathan.ecommerce.prices.infrastructure.adapters.outbound.persistence.h2.H2PriceRepositoryInternal;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
@@ -20,9 +20,9 @@ public class BeanConfiguration {
 
     @Bean
     @Primary
-    public PriceRepository createPriceRepository(PriceRepositoryInternalHibernate productRepositoryInternalHibernate, PriceMapper priceMapper) {
-        // You can change this for the Hibernate implementation
-        return new PriceRepositoryHibernate(productRepositoryInternalHibernate, priceMapper);
+    public PriceRepository createPriceRepository(H2PriceRepositoryInternal h2PriceRepositoryInternal, PriceMapper priceMapper) {
+        // You can change this for MongoDB, Postgres, MySql repository implementation
+        return new H2PriceRepository(h2PriceRepositoryInternal, priceMapper);
     }
 
     @Bean
